@@ -8,10 +8,13 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
 
         File results = new File("results.txt");
@@ -60,12 +63,13 @@ public class Main {
                     ILS ils = new ILS();
                     double value = ils.calculate(input);
                     System.out.println("Shekels: " + input);
-                    System.out.println("Dollars: " + String.format("%.2f", value));
+                    BigDecimal bd = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+                    System.out.println("Dollars: " + bd.doubleValue());
                     i++;
-                    resultsInUSD.add(value);
+                    resultsInUSD.add(bd.doubleValue());
                     try {
                         DataOutputStream valueOutput = new DataOutputStream(toResults);
-                        valueOutput.writeChars(Double.toString(value));
+                        valueOutput.writeChars(Double.toString(bd.doubleValue()));
                         valueOutput.writeChars(" USD, ");
                     } catch (IOException e){
                         System.out.println("IOException: " + e);
