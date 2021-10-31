@@ -4,6 +4,7 @@ import Currency.ILS;
 import Currency.USD;
 import Enums.Coins;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -12,6 +13,8 @@ public class Main {
 //        Introduction Screen:
         System.out.println("Welcome to the Currency Converter");
         boolean isUserActive = true;
+        ArrayList<Double> resultsInUSD = new ArrayList<Double>();
+        ArrayList<Double> resultsInILS = new ArrayList<Double>();
         while (isUserActive) {
             System.out.println("Please Choose an Option:");
 //        Choice Screen:
@@ -30,6 +33,7 @@ public class Main {
                     System.out.println("Dollars: " + input);
                     System.out.println("Shekel: " + value);
                     i++;
+                    resultsInILS.add(value);
 //        ILS to USD Screen:
                 } else if (choice == 2) {
                     System.out.println("Please enter amount to convert from ILS to USD");
@@ -38,8 +42,9 @@ public class Main {
                     ILS ils = new ILS();
                     double value = ils.calculate(input);
                     System.out.println("Shekels: " + input);
-                    System.out.println("Dollars: " + value);
+                    System.out.println("Dollars: " + String.format("%.2f", value));
                     i++;
+                    resultsInUSD.add(value);
 //        Invalid Choice Screen
                 } else {
                     System.out.println("Invalid Choice, please choose again");
@@ -51,6 +56,8 @@ public class Main {
                 String startOver = scanForRestart.next();
                 if (startOver.equals("N")) {
                     System.out.println("Thanks for using our Currency Converter");
+                    System.out.println(resultsInILS + " Shekels");
+                    System.out.println(resultsInUSD + " Dollars");
                     isUserActive = false;
                 } else if (!startOver.equals("Y")) {
                     System.out.println("Invalid choice, please choose again");
