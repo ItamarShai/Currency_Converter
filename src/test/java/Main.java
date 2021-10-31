@@ -32,7 +32,7 @@ public class Main {
         while (isUserActive) {
             System.out.println("Please Choose an Option:");
 //        Choice Screen:
-            for (int i = 0; i < 1;) {
+            for (int i = 0; i < 1; ) {
                 System.out.println("1. Dollars to Shekel");
                 System.out.println("2. Shekel to Dollars");
                 Scanner scanner = new Scanner(System.in);
@@ -52,7 +52,7 @@ public class Main {
                         DataOutputStream valueOutput = new DataOutputStream(toResults);
                         valueOutput.writeChars(Double.toString(value));
                         valueOutput.writeChars(" ILS, ");
-                    } catch (IOException e){
+                    } catch (IOException e) {
                         System.out.println("IOException: " + e);
                     }
 //        ILS to USD Screen:
@@ -71,7 +71,7 @@ public class Main {
                         DataOutputStream valueOutput = new DataOutputStream(toResults);
                         valueOutput.writeChars(Double.toString(bd.doubleValue()));
                         valueOutput.writeChars(" USD, ");
-                    } catch (IOException e){
+                    } catch (IOException e) {
                         System.out.println("IOException: " + e);
                     }
 //        Invalid Choice Screen
@@ -80,17 +80,22 @@ public class Main {
                 }
             }
 //        Start Over Screen:
+            for (int j = 0; j < 1;) {
                 System.out.println("Start Over?");
-            Scanner scanForRestart = new Scanner(System.in);
+                Scanner scanForRestart = new Scanner(System.in);
                 String startOver = scanForRestart.next();
                 if (startOver.equals("N")) {
                     System.out.println("Thanks for using our Currency Converter");
                     System.out.println(resultsInILS + " Shekels");
                     System.out.println(resultsInUSD + " Dollars");
                     isUserActive = false;
+                    j++;
                 } else if (!startOver.equals("Y")) {
                     System.out.println("Invalid choice, please choose again");
+                } else {
+                    j++;
                 }
             }
         }
     }
+}
