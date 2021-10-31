@@ -47,7 +47,8 @@ public class Main {
                     resultsInILS.add(value);
                     try {
                         DataOutputStream valueOutput = new DataOutputStream(toResults);
-                        valueOutput.writeDouble(value);
+                        valueOutput.writeChars(Double.toString(value));
+                        valueOutput.writeChars(" ILS, ");
                     } catch (IOException e){
                         System.out.println("IOException: " + e);
                     }
@@ -64,7 +65,8 @@ public class Main {
                     resultsInUSD.add(value);
                     try {
                         DataOutputStream valueOutput = new DataOutputStream(toResults);
-                        valueOutput.writeDouble(value);
+                        valueOutput.writeChars(Double.toString(value));
+                        valueOutput.writeChars(" USD, ");
                     } catch (IOException e){
                         System.out.println("IOException: " + e);
                     }
