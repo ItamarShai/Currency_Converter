@@ -4,17 +4,28 @@ import Currency.ILS;
 import Currency.USD;
 import Enums.Coins;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-//        Introduction Screen:
-        System.out.println("Welcome to the Currency Converter");
-        boolean isUserActive = true;
+        File results = new File("results.txt");
+        FileOutputStream toResults = new FileOutputStream(results);
+
         ArrayList<Double> resultsInUSD = new ArrayList<Double>();
         ArrayList<Double> resultsInILS = new ArrayList<Double>();
+
+//        Introduction Screen:
+
+        System.out.println("Welcome to the Currency Converter");
+
+        boolean isUserActive = true;
+
         while (isUserActive) {
             System.out.println("Please Choose an Option:");
 //        Choice Screen:
@@ -34,6 +45,12 @@ public class Main {
                     System.out.println("Shekel: " + value);
                     i++;
                     resultsInILS.add(value);
+                    try {
+                        DataOutputStream valueOutput = new DataOutputStream(toResults);
+                        valueOutput.writeDouble(value);
+                    } catch (IOException e){
+                        System.out.println("IOException: " + e);
+                    }
 //        ILS to USD Screen:
                 } else if (choice == 2) {
                     System.out.println("Please enter amount to convert from ILS to USD");
@@ -45,6 +62,12 @@ public class Main {
                     System.out.println("Dollars: " + String.format("%.2f", value));
                     i++;
                     resultsInUSD.add(value);
+                    try {
+                        DataOutputStream valueOutput = new DataOutputStream(toResults);
+                        valueOutput.writeDouble(value);
+                    } catch (IOException e){
+                        System.out.println("IOException: " + e);
+                    }
 //        Invalid Choice Screen
                 } else {
                     System.out.println("Invalid Choice, please choose again");
