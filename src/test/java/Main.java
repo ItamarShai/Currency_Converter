@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
         File results = new File("results.txt");
         FileOutputStream toResults = new FileOutputStream(results);
 
@@ -36,9 +35,9 @@ public class Main {
                 System.out.println("1. Dollars to Shekel");
                 System.out.println("2. Shekel to Dollars");
                 Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
+                String choice = scanner.next();
 //        USD to ILS Screen:
-                if (choice == 1) {
+                if (choice.equals("1")) {
                     System.out.println("Please enter amount to convert from USD to ILS");
                     double input = scanner.nextDouble();
                     Coin ilsValue = CoinFactory.getCoinInstance(Coins.USD);
@@ -56,7 +55,7 @@ public class Main {
                         System.out.println("IOException: " + e);
                     }
 //        ILS to USD Screen:
-                } else if (choice == 2) {
+                } else if (choice.equals("2")) {
                     System.out.println("Please enter amount to convert from ILS to USD");
                     double input = scanner.nextDouble();
                     Coin usdValue = CoinFactory.getCoinInstance(Coins.ILS);
